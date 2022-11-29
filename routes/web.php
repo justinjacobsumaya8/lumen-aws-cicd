@@ -16,3 +16,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+if (!app()->environment('prod')) {
+    $router->get('/key', function() { 
+        return 'base64:'. base64_encode(\Illuminate\Support\Str::random(32));
+    });
+}
